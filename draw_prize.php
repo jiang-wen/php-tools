@@ -5,9 +5,9 @@ ini_set('memory_limit','1024M');
 $rate = 1000;
 
 $prize = array(
-	1=>array('id'=>1,'name'=>'华为 P30 Pro','num'=>100),
-	2=>array('id'=>2,'name'=>'华为 MateBook X Pro','num'=>50),
-	3=>array('id'=>3,'name'=>'荣耀 Nova 3','num'=>200),
+	1=>array('id'=>1,'name'=>'平台币3个','num'=>100),
+	2=>array('id'=>2,'name'=>'小7虎1只','num'=>50),
+	3=>array('id'=>3,'name'=>'代金券1张','num'=>200),
 );
 
 //模拟抽奖次数
