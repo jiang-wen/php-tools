@@ -1,13 +1,15 @@
 <?php
+define('I',DIRECTORY_SEPARATOR);
 
 if(basename($_SERVER['REQUEST_URI']) == basename(__FILE__)){
     JumpToIndex('先访问index.php');
 }
 
-define('I',DIRECTORY_SEPARATOR);
+//当前脚本目录
+define('PATH',dirname(__FILE__));
 
 //opencc根目录
-define('OPENCC',"D:".I."opencc-1.0.4");
+define('OPENCC',PATH.I."opencc-1.0.4");
 
 //opencc.exe路径
 define('OPENCC_EXE',OPENCC.I."bin".I."opencc");
@@ -15,14 +17,18 @@ define('OPENCC_EXE',OPENCC.I."bin".I."opencc");
 //opencc配置文件路径
 define('OPENCC_CONFIG_DIR',OPENCC.I."share".I."opencc");
 
-//当前脚本目录
-define('PATH',dirname(__FILE__));
 
 //临时存放上传文件的目录
 define('TEMP_FILE_DIR',PATH.I.'upload');
 
 //转换后的目录
 define('OUTPUT_FILE_DIR',PATH.I.'output');
+
+//压缩包文件名
+define('OUTPUT_ZIP',PATH.I.'download.zip');
+
+//错误文件
+define('ERROR_FILE',OUTPUT_FILE_DIR.I.'error.txt');
 
 //读取opencc配置文件
 $config = scandir(OPENCC_CONFIG_DIR);
@@ -34,7 +40,7 @@ $config = array_filter($config,function ($file){
     }
 });
 
-
+//跳转至首页
 function JumpToIndex($msg=''){
     header("Refresh:1;url=".dirname($_SERVER['REQUEST_URI']).I."index.php");
     echo $msg."<br>";
@@ -46,4 +52,17 @@ function JumpToIndex($msg=''){
     }
     echo "正在跳转...";
     exit();
+}
+
+//递归删除文件夹及里面的文件
+function RemoveDir($dir){
+    if(!is_dir($dir)){
+        unlink($dir);
+    }else{
+        $dir_file = scandir($dir);
+        for($i=2;$i<count($dir_file);$i++){
+            RemoveDir($dir.I.$dir_file[$i]);
+        }
+        rmdir($dir);
+    }
 }
