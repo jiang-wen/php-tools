@@ -19,7 +19,7 @@ define('OPENCC_CONFIG_DIR',OPENCC.I."share".I."opencc");
 
 
 //临时存放上传文件的目录
-define('TEMP_FILE_DIR',PATH.I.'upload');
+define('UPLOAD_FILE_DIR',PATH.I.'upload');
 
 //转换后的目录
 define('OUTPUT_FILE_DIR',PATH.I.'output');

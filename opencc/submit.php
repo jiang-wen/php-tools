@@ -17,8 +17,8 @@ if(empty($files['name'])){
     JumpToIndex('未选择文件');
 }
 
-if(!is_dir(TEMP_FILE_DIR)){
-    mkdir(TEMP_FILE_DIR);
+if(!is_dir(UPLOAD_FILE_DIR)){
+    mkdir(UPLOAD_FILE_DIR);
 }
 if(!is_dir(OUTPUT_FILE_DIR)){
     mkdir(OUTPUT_FILE_DIR);
@@ -26,7 +26,7 @@ if(!is_dir(OUTPUT_FILE_DIR)){
 
 $error = array();
 foreach ($files['tmp_name'] as $key=>$value) {
-    $input_file = TEMP_FILE_DIR . I . $files['name'][$key];
+    $input_file = UPLOAD_FILE_DIR . I . $files['name'][$key];
     $output_file = OUTPUT_FILE_DIR . I . $files['name'][$key];
     $file_content = file_get_contents($value);
     $encoding = mb_detect_encoding($file_content,"UTF-8, GBK");
@@ -67,7 +67,7 @@ if(!empty($error)){
 $zip->close();
 
 //删除临时文件
-RemoveDir(TEMP_FILE_DIR);
+RemoveDir(UPLOAD_FILE_DIR);
 RemoveDir(OUTPUT_FILE_DIR);
 
 //输出文件
